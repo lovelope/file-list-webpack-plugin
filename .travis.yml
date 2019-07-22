@@ -6,5 +6,5 @@ git:
   depth: 3
 
 script:
-  - 'npm run test'
   - 'npm run build'
+  - 'npm run test'
