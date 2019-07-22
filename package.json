@@ -1,0 +1,95 @@
+{
+  "name": "@lovelope/file-list-webpack-plugin",
+  "version": "0.0.1",
+  "description": "A webpack plugin to show your build file(s).",
+  "keywords": [
+    "file",
+    "list",
+    "node",
+    "plugin",
+    "webpack"
+  ],
+  "homepage": "https://github.com/lovelope/file-list-webpack-plugin",
+  "bugs": {
+    "url": "https://github.com/lovelope/file-list-webpack-plugin/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lovelope/file-list-webpack-plugin.git"
+  },
+  "license": "MIT",
+  "author": "lovelope <lovelope@qq.com>",
+  "files": [
+    "lib/"
+  ],
+  "main": "lib/file-list-webpack-plugin.js",
+  "types": "lib/file-list-webpack-plugin.d.ts",
+  "scripts": {
+    "build": "npm run clean && npm run build:compile && npm run build:types",
+    "build:compile": "cross-env NODE_ENV=production babel src -d lib --verbose --extensions .ts --ignore */**/*.d.ts,**/**/*.test.ts --source-maps",
+    "build:types": "cross-env NODE_ENV=production tsc --project tsconfig.types.json",
+    "clean": "rimraf lib __test__/dist",
+    "dev": "npm run clean && cross-env NODE_ENV=development babel -w src -d lib --verbose --extensions .ts --ignore */**/*.d.ts,**/**/*.test.ts --source-maps",
+    "eslint": "eslint --ext .js,.jsx,.ts,.tsx .",
+    "prettier": "prettier --write \"**/*.{js,jsx,css,less,json}\"",
+    "test": "cross-env NODE_ENV=production ava --verbose __test__/test.js",
+    "test:build": "webpack --config __test__/webpack.config.js"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*.{html,json,md,css,less}": [
+      "prettier --write",
+      "git add --force"
+    ],
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "git add --force"
+    ]
+  },
+  "dependencies": {
+    "@types/node": "^12.6.8",
+    "@types/webpack": "^4.32.0",
+    "webpack": "^4.36.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-decorators": "^7.4.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-typescript": "^7.3.3",
+    "@babel/register": "^7.5.5",
+    "@commitlint/cli": "^8.1.0",
+    "@commitlint/config-conventional": "^8.1.0",
+    "@typescript-eslint/eslint-plugin": "^1.13.0",
+    "@typescript-eslint/parser": "^1.13.0",
+    "ava": "^2.2.0",
+    "babel-eslint": "^10.0.2",
+    "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.0",
+    "husky": "^3.0.1",
+    "lint-staged": "^9.2.0",
+    "prettier": "^1.18.2",
+    "rimraf": "^2.6.3",
+    "typescript": "^3.5.3",
+    "webpack-cli": "^3.3.6"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  },
+  "readme": "https://github.com/lovelope/file-list-webpack-plugin/wiki"
+}
